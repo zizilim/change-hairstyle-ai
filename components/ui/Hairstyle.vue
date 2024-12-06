@@ -278,27 +278,15 @@ const readPrediction = async (id: string) => {
     console.log(e)
   }
 }
+
 export default {
   methods: {
-    async createHairstyle() {
+    createHairstyle() {
       console.log("Create Hairstyle 버튼 클릭됨");
-      try {
-        const response = await this.$axios.post('/api/predictions', {
-          // 필요한 요청 데이터
-          version: "모델_버전_ID",
-          input: {
-            image: "이미지_URL",
-            text: "헤어스타일 설명",
-          },
-        });
-        console.log("API 응답:", response.data);
-      } catch (error) {
-        console.error("API 요청 실패:", error);
-      }
     },
   },
 };
-
+  
 </script>
 
 <style lang="stylus" scoped>
