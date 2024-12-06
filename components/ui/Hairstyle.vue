@@ -59,7 +59,7 @@ main
             label="Color"
           )
           v-btn(
-            @click=""
+            @click="createHairstyle"
             :disabled="!image"
             :loading="loading_submit"
             color="secondary"
@@ -98,6 +98,11 @@ main
           floating
         ) Need a quality bag?
         template(v-else) Need a quality bag?
+  <div>
+    <!-- 버튼 클릭 시 메서드 호출 -->
+    <button @click="createHairstyle">Create Hairstyle</button>
+  </div>
+  
 </template>
 
 <script setup lang="ts">
@@ -273,6 +278,27 @@ const readPrediction = async (id: string) => {
     console.log(e)
   }
 }
+export default {
+  methods: {
+    async createHairstyle() {
+      console.log("Create Hairstyle 버튼 클릭됨");
+      try {
+        const response = await this.$axios.post('/api/predictions', {
+          // 필요한 요청 데이터
+          version: "모델_버전_ID",
+          input: {
+            image: "이미지_URL",
+            text: "헤어스타일 설명",
+          },
+        });
+        console.log("API 응답:", response.data);
+      } catch (error) {
+        console.error("API 요청 실패:", error);
+      }
+    },
+  },
+};
+
 </script>
 
 <style lang="stylus" scoped>
